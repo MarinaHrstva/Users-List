@@ -1,0 +1,11 @@
+.main-container {
+  padding: 3rem;
+}
+
+.btn-primary {
+  padding: 0.5rem;
+  background-color: crimson;
+  color: white;
+  border: 1px solid white;
+  border-radius: 4px;
+}

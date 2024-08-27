@@ -1,14 +1,19 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Collapse } from "antd";
 
 import { getUsers } from "../../state/usersSlice";
 import { AppDispatch, RootState } from "../../state/store";
+import UserDetails from "./UserDetails";
+import UserEditForm from "./UserEditForm";
+import ButtonPrimary from "../UI/ButtonPrimary";
 
 function UserList(): JSX.Element {
   const { users, loading, error } = useSelector(
     (state: RootState) => state.users
   );
+
+  const [isEditing, setIsEditing] = useState(false);
 
   const dispatch = useDispatch<AppDispatch>();
   const { Panel } = Collapse;
@@ -35,7 +40,13 @@ function UserList(): JSX.Element {
         {users.map((user) => {
           return (
             <Panel key={user.id} header={user.name}>
-              <p>{`Username: ${user.name}`}</p>
+              {isEditing ? <UserEditForm /> : <UserDetails user={user} />}
+              <ButtonPrimary onClick={() => setIsEditing(!isEditing)}>
+                Edit
+              </ButtonPrimary>
+              <ButtonPrimary onClick={() => setIsEditing(false)}>
+                Cancel
+              </ButtonPrimary>
             </Panel>
           );
         })}

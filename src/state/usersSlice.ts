@@ -1,8 +1,23 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { UserConstructor } from "../utils";
+
+type Address = {
+  street: string;
+  suite: string;
+  city: string;
+};
+
+export type User = {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  address: Address;
+};
 
 type InitialState = {
-  users: any[];
+  users: User[] | [];
   loading: boolean;
   error: string | null;
 };
@@ -37,7 +52,10 @@ const usersSlice = createSlice({
       })
       .addCase(getUsers.fulfilled, (state, action) => {
         state.loading = false;
-        state.users = action.payload;
+        state.users = action.payload.map((element: User) => {
+          const newUser = new UserConstructor(element);
+          return newUser;
+        });
       })
       .addCase(getUsers.rejected, (state, action) => {
         state.loading = false;
