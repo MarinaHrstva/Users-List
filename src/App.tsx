@@ -1,12 +1,10 @@
-import React from "react";
 import "./App.css";
+import UserList from "./components/UserList/UserList";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>It works</p>
-      </header>
+    <div className="main-container">
+      <UserList />
     </div>
   );
 }
