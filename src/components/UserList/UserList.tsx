@@ -36,16 +36,23 @@ function UserList(): JSX.Element {
 
   return (
     <div className="user-list-container">
-      <Collapse>
+      <Collapse accordion>
         {users.map((user) => {
           return (
             <Panel key={user.id} header={user.name}>
-              {isEditing ? <UserEditForm /> : <UserDetails user={user} />}
-              <ButtonPrimary onClick={() => setIsEditing(!isEditing)}>
-                Edit
+              {isEditing ? (
+                <UserEditForm user={user} setIsEditing={setIsEditing} />
+              ) : (
+                <UserDetails user={user} />
+              )}
+              <ButtonPrimary
+                className="btn-primary"
+                onClick={() => setIsEditing(!isEditing)}
+              >
+                {isEditing ? "Cancel" : "Edit"}
               </ButtonPrimary>
-              <ButtonPrimary onClick={() => setIsEditing(false)}>
-                Cancel
+              <ButtonPrimary className="btn-secondary" onClick={() => {}}>
+                See Posts
               </ButtonPrimary>
             </Panel>
           );

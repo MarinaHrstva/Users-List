@@ -3,6 +3,7 @@ import axios from "axios";
 import { UserConstructor } from "../utils";
 
 type Address = {
+  [key: string]: string;
   street: string;
   suite: string;
   city: string;
@@ -40,6 +41,22 @@ export const getUsers = createAsyncThunk("users/getUsers", async () => {
   }
 });
 
+export const updateUser = createAsyncThunk(
+  "users/updateUser",
+  async (user: User) => {
+    try {
+      const response = await axios.put(
+        `https://jsonplaceholder.typicode.com/users/${user.id}`,
+        user
+      );
+      const data = response.data;
+      return data;
+    } catch (error) {
+      new Error("Something went wrong!");
+    }
+  }
+);
+
 const usersSlice = createSlice({
   name: "users",
   initialState,
@@ -58,6 +75,21 @@ const usersSlice = createSlice({
         });
       })
       .addCase(getUsers.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message ? action.error.message : null;
+      })
+      .addCase(updateUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        const index = state.users.findIndex(
+          (user) => user.id === action.payload.id
+        );
+        state.users[index] = action.payload;
+        state.loading = false;
+      })
+      .addCase(updateUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message ? action.error.message : null;
       });
