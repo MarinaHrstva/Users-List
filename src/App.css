@@ -26,7 +26,13 @@
   color: white;
 }
 
+.btn-container {
+  padding-inline: 3rem;
+}
+
 .user-details-form {
+  padding-inline: 3rem;
+  padding-top: 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -47,4 +53,27 @@
   color: red;
   font-size: 10px;
   margin: 0;
+}
+
+.posts-list {
+  padding: 3rem;
+}
+
+.user-details-container {
+  padding-inline: 3rem;
+}
+
+.posts-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.post-container {
+  padding: 1rem;
+  overflow: hidden;
+  border: 1px solid rgb(204, 195, 195);
+  border-radius: 8px;
+  margin-block: 1rem;
+  background-color: rgba(0, 0, 0, 0.02);
 }

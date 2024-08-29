@@ -6,7 +6,7 @@ type Props = {
 
 function UserDetails({ user }: Props) {
   return (
-    <div className="details-container">
+    <div className="user-details-container">
       <p>Username: {user.username}</p>
       <p>Email: {user.email}</p>
       <p>City: {user.address.city}</p>

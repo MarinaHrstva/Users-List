@@ -1,13 +1,12 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { useDispatch } from "react-redux";
+import { SubmitHandler, useForm } from "react-hook-form";
+
 import { updateUser, User } from "../../state/usersSlice";
 import ButtonPrimary from "../UI/ButtonPrimary";
-import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../state/store";
-import { SubmitHandler, useForm } from "react-hook-form";
 
 type Props = {
   user: User;
-  setIsEditing: Dispatch<SetStateAction<boolean>>;
 };
 
 type Form = {
@@ -21,7 +20,7 @@ type Form = {
   };
 };
 
-function UserEditForm({ user, setIsEditing }: Props): JSX.Element {
+function UserEditForm({ user }: Props): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
   const {
     register,
@@ -42,7 +41,7 @@ function UserEditForm({ user, setIsEditing }: Props): JSX.Element {
   });
 
   const onSubmitHandler: SubmitHandler<Form> = async (data) => {
-    await dispatch(updateUser({ ...data, id: user.id }));
+    dispatch(updateUser({ ...data, id: user.id }));
   };
 
   return (
@@ -98,7 +97,6 @@ function UserEditForm({ user, setIsEditing }: Props): JSX.Element {
           <p className="error-message"> {errors.address.city.message}</p>
         )}
       </div>
-
       <div className="form-item-container">
         <label htmlFor="address.street">Street: </label>
         <input
@@ -111,7 +109,6 @@ function UserEditForm({ user, setIsEditing }: Props): JSX.Element {
           <p className="error-message">{errors.address.street.message}</p>
         )}
       </div>
-
       <div className="form-item-container">
         <label htmlFor="address.suite">Suite: </label>
         <input
@@ -125,7 +122,6 @@ function UserEditForm({ user, setIsEditing }: Props): JSX.Element {
           <p className="error-message">{errors.address.suite.message}</p>
         )}
       </div>
-
       <ButtonPrimary className="btn-secondary" type="submit" disable={!isValid}>
         Submit
       </ButtonPrimary>

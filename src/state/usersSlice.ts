@@ -1,6 +1,11 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  createAsyncThunk,
+  createSelector,
+} from "@reduxjs/toolkit";
 import axios from "axios";
 import { UserConstructor } from "../utils";
+import { RootState } from "./store";
 
 type Address = {
   [key: string]: string;
@@ -20,13 +25,13 @@ export type User = {
 type InitialState = {
   users: User[] | [];
   loading: boolean;
-  error: string | null;
+  error: string | undefined;
 };
 
 const initialState: InitialState = {
   users: [],
   loading: false,
-  error: null,
+  error: undefined,
 };
 
 export const getUsers = createAsyncThunk("users/getUsers", async () => {
@@ -65,7 +70,7 @@ const usersSlice = createSlice({
     builder
       .addCase(getUsers.pending, (state) => {
         state.loading = true;
-        state.error = null;
+        state.error = undefined;
       })
       .addCase(getUsers.fulfilled, (state, action) => {
         state.loading = false;
@@ -76,11 +81,11 @@ const usersSlice = createSlice({
       })
       .addCase(getUsers.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message ? action.error.message : null;
+        state.error = action.error.message;
       })
       .addCase(updateUser.pending, (state) => {
         state.loading = true;
-        state.error = null;
+        state.error = undefined;
       })
       .addCase(updateUser.fulfilled, (state, action) => {
         const index = state.users.findIndex(
@@ -91,7 +96,7 @@ const usersSlice = createSlice({
       })
       .addCase(updateUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message ? action.error.message : null;
+        state.error = action.error.message;
       });
   },
 });
