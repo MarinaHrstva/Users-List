@@ -107,7 +107,12 @@ function TasksTable() {
   ];
 
   return (
-    <Table dataSource={tasks} columns={columns} pagination={{ pageSize: 10 }}className="tasks-table"/>
+    <Table
+      dataSource={tasks}
+      columns={columns}
+      pagination={{ pageSize: 10 }}
+      className="tasks-table"
+    />
   );
 }
 

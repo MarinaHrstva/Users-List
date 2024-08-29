@@ -8,6 +8,8 @@ import { useCallback } from "react";
 
 type Props = {
   user: User;
+  setIsEditing: any;
+  isFromPosts?: boolean;
 };
 
 type Form = {
@@ -21,7 +23,7 @@ type Form = {
   };
 };
 
-function UserEditForm({ user }: Props): JSX.Element {
+function UserEditForm({ user, setIsEditing, isFromPosts }: Props): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
   const {
     register,
@@ -44,9 +46,9 @@ function UserEditForm({ user }: Props): JSX.Element {
   const onSubmitHandler: SubmitHandler<Form> = useCallback(
     async (data) => {
       dispatch(updateUser({ ...data, id: user.id }));
+      isFromPosts && setIsEditing(false);
     },
-    [dispatch, user.id]
-    
+    [dispatch, isFromPosts, setIsEditing, user.id]
   );
 
   return (

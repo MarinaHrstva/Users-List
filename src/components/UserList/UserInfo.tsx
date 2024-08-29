@@ -8,9 +8,10 @@ import { User } from "../../state/usersSlice";
 
 type Props = {
   user: User;
+  isFromPosts?: boolean;
 };
 
-function UserInfo({ user }: Props) {
+function UserInfo({ user, isFromPosts }: Props) {
   const [isEditing, setIsEditing] = useState(false);
   const { id } = useParams();
 
@@ -25,7 +26,15 @@ function UserInfo({ user }: Props) {
 
   return (
     <>
-      {isEditing ? <UserEditForm user={user} /> : <UserDetails user={user} />}
+      {isEditing ? (
+        <UserEditForm
+          user={user}
+          setIsEditing={setIsEditing}
+          isFromPosts={isFromPosts}
+        />
+      ) : (
+        <UserDetails user={user} />
+      )}
       <div className="btn-container">
         <ButtonPrimary
           className="btn-primary"

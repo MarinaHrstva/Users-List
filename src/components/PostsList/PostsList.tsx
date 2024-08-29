@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -38,7 +38,7 @@ function PostsList() {
 
   return (
     <>
-      <UserInfo user={currentUser}/>
+      <UserInfo user={currentUser} isFromPosts />
       <div className="posts-list">
         {selectedUserPosts.map((post) => (
           <PostsDetails post={post} key={post.id} />
