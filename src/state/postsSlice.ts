@@ -31,6 +31,38 @@ export const getUserPosts = createAsyncThunk(
   }
 );
 
+export const updatePost = createAsyncThunk(
+  "users/updatePost",
+  async (post: Post) => {
+    try {
+      const response = await axios.put(
+        `https://jsonplaceholder.typicode.com/posts/${post.id}`,
+        post
+      );
+      const data = response.data;
+      return data;
+    } catch (error) {
+      new Error("Something went wrong!");
+    }
+  }
+);
+
+export const deletePost = createAsyncThunk(
+  "users/deletePost",
+  async (id: string) => {
+    try {
+      const response = await axios.delete(
+        `https://jsonplaceholder.typicode.com/posts/${id}`
+      );
+      if (response.status === 200) {
+        return id;
+      }
+    } catch (error) {
+      new Error("Something went wrong!");
+    }
+  }
+);
+
 const postsSlice = createSlice({
   name: "posts",
   initialState,
@@ -46,10 +78,37 @@ const postsSlice = createSlice({
       })
       .addCase(getUserPosts.rejected, (state, action) => {
         state.error = action.error.message;
+        state.loading = false;
+      })
+      .addCase(updatePost.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updatePost.fulfilled, (state, action) => {
+        const index = state.selectedUserPosts.findIndex(
+          (post) => post.id === action.payload.id
+        );
+        state.selectedUserPosts[index] = action.payload;
+        state.loading = false;
+        state.error = undefined;
+      })
+      .addCase(updatePost.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      .addCase(deletePost.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(deletePost.fulfilled, (state, action) => {
+        state.loading = false;
+        state.selectedUserPosts = state.selectedUserPosts.filter(
+          (post) => post.id !== action.payload
+        );
+      })
+      .addCase(deletePost.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
       });
   },
 });
-
-// export const {} = postsSlice.actions;
 
 export default postsSlice.reducer;

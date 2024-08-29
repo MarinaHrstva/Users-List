@@ -41,9 +41,11 @@
 .form-item-container > label {
   display: block;
   font-size: 12px;
+  margin-bottom: 4px;
 }
 
-.form-item-container > input {
+.form-item-container > input,
+.form-item-container > textarea {
   padding: 0.5rem;
   border: 1px solid rgb(204, 195, 195);
   border-radius: 4px;
@@ -76,4 +78,8 @@
   border-radius: 8px;
   margin-block: 1rem;
   background-color: rgba(0, 0, 0, 0.02);
+}
+
+textarea {
+  resize: none;
 }

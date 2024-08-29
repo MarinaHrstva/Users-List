@@ -4,6 +4,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { updateUser, User } from "../../state/usersSlice";
 import ButtonPrimary from "../UI/ButtonPrimary";
 import { AppDispatch } from "../../state/store";
+import { useCallback } from "react";
 
 type Props = {
   user: User;
@@ -40,9 +41,13 @@ function UserEditForm({ user }: Props): JSX.Element {
     },
   });
 
-  const onSubmitHandler: SubmitHandler<Form> = async (data) => {
-    dispatch(updateUser({ ...data, id: user.id }));
-  };
+  const onSubmitHandler: SubmitHandler<Form> = useCallback(
+    async (data) => {
+      dispatch(updateUser({ ...data, id: user.id }));
+    },
+    [dispatch, user.id]
+    
+  );
 
   return (
     <form

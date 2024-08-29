@@ -1,9 +1,7 @@
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-
-import UserDetails from "../UserList/UserDetails";
-import UserEditForm from "../UserList/UserEditForm";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import { getUserPosts } from "../../state/postsSlice";
 import { AppDispatch, RootState } from "../../state/store";
 import PostsDetails from "./PostsDetails";
@@ -15,7 +13,6 @@ function PostsList() {
   const { selectedUserPosts, error, loading } = useSelector(
     (state: RootState) => state.posts
   );
-
   const currentUser = useSelector(
     (state: RootState) =>
       state.users.users.filter((u) => u?.id && u?.id.toString() === id)[0]
@@ -41,10 +38,10 @@ function PostsList() {
 
   return (
     <>
-      <UserInfo user={currentUser} />
+      <UserInfo user={currentUser}/>
       <div className="posts-list">
         {selectedUserPosts.map((post) => (
-          <PostsDetails post={post} />
+          <PostsDetails post={post} key={post.id} />
         ))}
       </div>
     </>
