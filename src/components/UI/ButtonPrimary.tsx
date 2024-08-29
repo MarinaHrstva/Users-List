@@ -1,7 +1,7 @@
 type Props = {
   onClick?: (e: any) => void;
   children: string;
-  className?: string;
+  className?: "btn-primary" | "btn-secondary";
   type?: "button" | "submit" | "reset" | undefined;
   disable?: boolean;
 };
@@ -15,7 +15,7 @@ function ButtonPrimary({
 }: Props): JSX.Element {
   return (
     <button
-      className={`btn-main ${className} ${disable && 'disable-btn'}`}
+      className={`btn-main ${className} ${disable && "disable-btn"}`}
       onClick={onClick}
       type={type || "button"}
       disabled={disable}

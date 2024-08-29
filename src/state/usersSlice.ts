@@ -1,11 +1,6 @@
-import {
-  createSlice,
-  createAsyncThunk,
-  createSelector,
-} from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { UserConstructor } from "../utils";
-import { RootState } from "./store";
 
 type Address = {
   [key: string]: string;

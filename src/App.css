@@ -83,3 +83,32 @@
 textarea {
   resize: none;
 }
+
+.tasks-table {
+  margin: 3rem;
+  border: 1px solid rgb(204, 195, 195);
+  border-radius: 8px;
+}
+
+ul.ant-pagination::after {
+  margin-right: 1rem;
+}
+
+.header-container {
+  background-color: rgb(204, 195, 195);
+  padding: 2rem;
+}
+
+.ant-btn-primary {
+  background-color: red;
+}
+
+.ant-btn-primary:hover {
+  background: red;
+  opacity: 0.3;
+}
+
+.header-btn-container {
+  display: flex;
+  gap: 1rem;
+}
