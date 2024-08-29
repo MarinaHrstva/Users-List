@@ -1,5 +1,7 @@
-.main-container {
+.user-list-container {
   padding: 3rem;
+  margin-inline: auto;
+  max-width: 30%;
 }
 
 .btn-main {
@@ -19,12 +21,30 @@
   background-color: rgb(85, 85, 247);
 }
 
+.disable-btn {
+  background-color: rgb(204, 195, 195);
+  color: white;
+}
+
 .user-details-form {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.user-details-form > input {
+.form-item-container > label {
+  display: block;
+  font-size: 12px;
+}
+
+.form-item-container > input {
   padding: 0.5rem;
+  border: 1px solid rgb(204, 195, 195);
+  border-radius: 4px;
+}
+
+.error-message {
+  color: red;
+  font-size: 10px;
+  margin: 0;
 }
