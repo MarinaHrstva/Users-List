@@ -8,7 +8,7 @@ export type Post = {
   body: string;
 };
 
-type InitialState = {
+export type InitialState = {
   selectedUserPosts: Post[] | [];
   loading: boolean;
   error: undefined | string;
