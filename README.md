@@ -2,7 +2,7 @@
 
 
 
-## Used technologies on the Front-End:
+## Used Front-End technologies:
 
 * React.js
 * Redux Toolkit
@@ -18,7 +18,7 @@
   
 <br>
 
-## For back-end is used:
+## Back-End:
 https://jsonplaceholder.typicode.com/
 
 <br>
@@ -26,6 +26,9 @@ https://jsonplaceholder.typicode.com/
 ## Available Scripts
 
 In the project directory, you can run:
+### `npm install`
+
+and after that
 
 ### `npm start`
 
